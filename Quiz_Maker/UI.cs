@@ -9,7 +9,7 @@ public class UI
     
     public static string AskUserToWriteAQuestion()
     {
-        Console.WriteLine("Please write your question");
+        Console.WriteLine("\nPlease write your question");
         return Console.ReadLine();
     }
     

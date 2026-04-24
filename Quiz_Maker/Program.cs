@@ -8,9 +8,7 @@ class Program
 
         for (int i = 0; i < 4; i++)
         {
-            string userQuestions = UI.AskUserToWriteAQuestion();
-            
-            
+            Question.questionText = UI.AskUserToWriteAQuestion();
         }    
     }
 }
