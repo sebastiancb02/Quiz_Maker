@@ -4,6 +4,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        UI.IntroText();
+
+        for (int i = 0; i < 4; i++)
+        {
+            string userQuestions = UI.AskUserToWriteAQuestion();
+            
+            
+        }    
     }
 }
