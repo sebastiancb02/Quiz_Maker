@@ -4,11 +4,28 @@ class Program
 {
     static void Main(string[] args)
     {
-        UI.IntroText();
+        UI.MenuText();
 
-        for (int i = 0; i < 4; i++)
+        while(true)
         {
-            Question.questionText = UI.AskUserToWriteAQuestion();
+            Question question = new Question();
+            question.questionText = UI.AskUserToWriteAQuestion();
+            
+            List<Answer> answers = new List<Answer>();
+            Answer answer = new Answer();
+            
+            while (true)
+            {
+                answer.answerText = UI.AskUserToWriteTheTextOfTheAnswers();
+                answer.correct = UI.AskUserToAssignTrueOrFalse();
+                answers.Add(answer);
+                question.answers = answers;
+
+                if (UI.AskUserIfMoreAnswersAreNeeded() == false)
+                {
+                    break;
+                }
+            }
         }    
     }
 }
