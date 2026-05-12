@@ -2,32 +2,54 @@ namespace Quiz_Maker;
 
 public class UI
 {
-    public static char MenuText()
+    public static char AllowUserToChooseGameMode()
     {
-        Console.WriteLine("Welcome! Choose between 2 modes:");
-        Console.WriteLine("Press 1 if you want to build your own quiz");
+        Console.WriteLine("\nWelcome! You can choose between 2 modes:");
+        Console.WriteLine("\nPress 1 if you want to build your own quiz");
         Console.WriteLine("Press 2 if you want to play a quiz game");
 
-        char modeOption = Console.ReadKey().KeyChar;
-        
-        if (modeOption == '1')
-            return '1';  
-        
-        if (modeOption == '2')
-            return '2';
-        
-        return modeOption;
+        return Console.ReadKey(true).KeyChar;
+    }
+
+    public static int ValidateUserInput(char input)
+    {
+        while (true)
+        {    
+            string userInputAsString = input.ToString();
+            int userInput;
+
+            bool valid = int.TryParse(userInputAsString, out userInput);
+                
+            if (!valid)
+            {
+                Console.WriteLine("\nInvalid Input"); 
+                input = Console.ReadKey(true).KeyChar;
+                continue;
+            }
+
+            if (userInput < 1 || userInput > 2) 
+            {
+                Console.WriteLine("\nPlease, make sure to choose either 1 or 2"); 
+                input = Console.ReadKey(true).KeyChar;
+                continue;
+            }
+                
+            return userInput;
+        }
     }
     
-    public static string AskUserToWriteAQuestion()
+    public static string AskUserToWriteAQuestion(List<Question> questionList)
     {
-        Console.WriteLine("\nPlease write your question");
+        if (questionList.Count >= 1)
+            Console.Clear();
+        
+        Console.WriteLine("\nPlease write your question + Hit ENTER:");
         return Console.ReadLine();
     }
     
     public static string AskUserToWriteTheTextOfTheAnswers()
     {
-        Console.WriteLine("\nPlease write as many possible answers as you want");
+        Console.WriteLine("\nWrite an answer + Hit Enter:");
         return Console.ReadLine();
     }
 
@@ -50,9 +72,22 @@ public class UI
     public static bool AskUserIfMoreAnswersAreNeeded()
     {
         Console.WriteLine("\nDo you want to keep adding answers to this question? (y/n)");
-        Console.WriteLine();
-        char userOption = Console.ReadKey().KeyChar;
+        char userOption = Console.ReadKey(true).KeyChar;
 
+        if (userOption == 'y' || userOption == 'Y')
+            return true;
+        
+        if (userOption == 'n' || userOption == 'N')
+            return false;
+        
+        return true;
+    }
+
+    public static bool AskUserIfMoreQuestionsAreNeeded()
+    {
+        Console.WriteLine("\nDo you want to keep adding more questions? (y/n)");
+        char userOption = Console.ReadKey().KeyChar;
+        
         if (userOption == 'y' || userOption == 'Y')
             return true;
         
