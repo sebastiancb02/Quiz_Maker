@@ -1,5 +1,6 @@
-namespace Quiz_Maker;
+using System.Xml.Serialization;
 
+namespace Quiz_Maker;
 public class Logic
 {
     public static void SerializeTheBuiltQuizGame(List<Question> questionList)
@@ -14,8 +15,14 @@ public class Logic
         }    
     }
 
-    public static void DeserializeTheBuiltQuizGame(List<Question> questionList)
+    public void DeserializeTheBuiltQuizGame(List<Question> questionList)
     {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
         
+        var path = @"/Users/sebastiancoparabackevall/RiderProjects/Quiz_Maker/Quiz_Maker";
+        using (FileStream file = File.OpenRead(path))
+        {
+            questionList = serializer.Deserialize(file) as List<Question>;
+        }    
     }
 }

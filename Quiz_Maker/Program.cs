@@ -1,6 +1,4 @@
-﻿using System.Xml.Serialization;
-
-namespace Quiz_Maker;
+﻿namespace Quiz_Maker;
 
 class Program
 {
@@ -38,11 +36,13 @@ class Program
                         break;
                 }
             }
+            
+            Logic.SerializeTheBuiltQuizGame(questionList);
         }
 
         if (modeOption == Constants.PLAY_QUIZ_MODE)
         {
-            //I'm a gooner
+                
         }    
     }
 }
