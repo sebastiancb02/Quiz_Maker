@@ -37,7 +37,7 @@ public class UI
             return userInput;
         }
     }
-    
+    //Mode 1
     public static string AskUserToWriteAQuestion(List<Question> questionList)
     {
         if (questionList.Count >= 1)
@@ -86,6 +86,25 @@ public class UI
     public static bool AskUserIfMoreQuestionsAreNeeded()
     {
         Console.WriteLine("\nDo you want to keep adding more questions? (y/n)");
+        char userOption = Console.ReadKey().KeyChar;
+        
+        if (userOption == 'y' || userOption == 'Y')
+            return true;
+        
+        if (userOption == 'n' || userOption == 'N')
+            return false;
+        
+        return true;
+    }
+    //Mode 2
+    public static void ShowMessageIfQuestionListIsEmpty()
+    {
+        Console.WriteLine("\nQuestion list is empty, therefore this mode is not playable :(");
+    }
+    
+    public static bool AskUserIfWantToContinueGame()
+    {
+        Console.WriteLine("\nWould you like to keep playing? (y/n)");
         char userOption = Console.ReadKey().KeyChar;
         
         if (userOption == 'y' || userOption == 'Y')

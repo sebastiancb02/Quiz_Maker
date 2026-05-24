@@ -6,23 +6,31 @@ public class Logic
     public static void SerializeTheBuiltQuizGame(List<Question> questionList)
     {
         XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
-        serializer.Serialize(Console.Out, questionList);
 
-        var path = @"/Users/sebastiancoparabackevall/RiderProjects/Quiz_Maker/Quiz_Maker";
+        string path = Constants.QUIZ_FILE_PATH;
         using (FileStream file = File.Create(path))
         {
             serializer.Serialize(file, questionList);
-        }    
+        }
     }
 
-    public void DeserializeTheBuiltQuizGame(List<Question> questionList)
+    public static List<Question> DeserializeTheBuiltQuizGame()
     {
         XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
+        string path = Constants.QUIZ_FILE_PATH;
+        string curFile = Constants.QUIZ_FILE_PATH;
         
-        var path = @"/Users/sebastiancoparabackevall/RiderProjects/Quiz_Maker/Quiz_Maker";
-        using (FileStream file = File.OpenRead(path))
+        if (File.Exists(curFile))
         {
-            questionList = serializer.Deserialize(file) as List<Question>;
-        }    
+            using (FileStream file = File.OpenRead(path))
+            {
+                return serializer.Deserialize(file) as List<Question>;
+            }    
+        }
+
+        else
+        {
+            return new List<Question>();
+        }
     }
 }
