@@ -55,31 +55,36 @@ class Program
                 }
 
                 Random rnd = new Random();
-                Question question;
-                question = questionList[rnd.Next(1, questionList.Count)];
+                
+                Question question = questionList[rnd.Next(1, questionList.Count)];
 
                 List<Answer> answerList = new List<Answer>();
-                Answer answer;
                 
-                for (int i = 0; i < questionList.Count; i++)
+                for (int i = 0; i < question.answerList.Count; i++)
                 {
-                    answer = question.answerText;
+                    Answer answer = question.answerList[i];
                     
+                    //Create method for the 2 lines below
                     Console.WriteLine(question.questionText);
-                    Console.WriteLine(question.answerList.answer.answerText);
+                    Console.WriteLine($"{i}." + question.answerList);
 
+                    int userOption = UI.AskUserToChooseOneOfTheOptions(question);
+                    
+                    Answer pickedAnswer = question.answerList[userOption - 1];
+                        
                     int pointCounter = 0;
-                    if (answer.correct == true)
+                    if (pickedAnswer.correct)
                     {
                         Console.WriteLine("Good boy");
                         pointCounter += 1;
                     }   
                 
-                    else
-                    {
-                        Console.WriteLine("Bad boy");
+                    else 
+                    { 
+                        Console.WriteLine("Bad boy"); 
                         pointCounter -= 1;
-                    } 
+                    }    
+                       
                 }
 
                 if (!UI.AskUserIfWantToContinueGame())

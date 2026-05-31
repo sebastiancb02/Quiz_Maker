@@ -115,4 +115,38 @@ public class UI
         
         return true;
     }
+
+    public static int AskUserToChooseOneOfTheOptions(Question question)
+    {
+        while (true)
+        {    
+            char input = Console.ReadKey().KeyChar;
+            string userInputAsString = input.ToString();
+            int userInput;
+
+            bool valid = int.TryParse(userInputAsString, out userInput);
+                
+            if (!valid)
+            {
+                Console.WriteLine("\nInvalid Input"); 
+                input = Console.ReadKey(true).KeyChar;
+                continue;
+            }
+            
+            if (userInput < 1 || userInput > question.answerList.Count) 
+            {
+                Console.WriteLine("\nYour chosen option is not valid, pick another one"); 
+                input = Console.ReadKey(true).KeyChar;
+                continue;
+            }
+                
+            return userInput;
+        }
+    }
+
+    public static void DisplayBothQuestionAndAnswerOptions(Question question)
+    {
+        Console.WriteLine(question.questionText);
+        //Console.WriteLine($"{i}." + question.answerList);
+    }
 }
