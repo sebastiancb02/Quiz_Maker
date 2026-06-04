@@ -26,16 +26,12 @@ class Program
                     {
                         answer.correct = UI.AskUserToAssignTrueOrFalse();
                     }
-                    
-                    if (answer.correct)
+                    else
                     {
+                        answer.correct = false;
                         hasCorrectAnswer = true;
-
-                        for (int i = 0; i < answerList.Count; i++)
-                        {
-                            question.answerList[i].correct = false;
-                        }
                     }
+                    
                     answerList.Add(answer);
                     question.answerList = answerList;
 
@@ -60,6 +56,7 @@ class Program
 
         if (modeOption == Constants.PLAY_QUIZ_MODE)
         {
+            Random rnd = new Random();
             bool keepPlaying = true;
             while (keepPlaying)
             {
@@ -71,36 +68,34 @@ class Program
                     UI.ShowMessageIfQuestionListIsEmpty();
                     break;
                 }
-
-                Random rnd = new Random();
                 
                 Question question = questionList[rnd.Next(0, questionList.Count)];
-
-                List<Answer> answerList = new List<Answer>();
+                
+                UI.DisplayQuestions(question);
                 
                 for (int i = 0; i < question.answerList.Count; i++)
                 {
                     Answer answer = question.answerList[i];
-                    
-                    UI.DisplayBothQuestionAndAnswerOptions(question, i);
-
-                    int userOption = UI.AskUserToChooseOneOfTheOptions(question);
-                    
-                    Answer pickedAnswer = question.answerList[userOption - 1];
-                        
-                    int pointCounter = 0;
-                    if (pickedAnswer.correct)
-                    {
-                        UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
-                        pointCounter += 1;
-                    }   
-                
-                    else
-                    {
-                        UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
-                        pointCounter -= 1;
-                    }    
+                    UI.DisplayAnswerOptions(question, i);
                 }
+                
+                int userOption = UI.AskUserToChooseOneOfTheOptions(question);
+                    
+                Answer pickedAnswer = question.answerList[userOption - 1];
+                        
+                int pointCounter = 0;
+                if (pickedAnswer.correct)
+                {
+                    UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct); 
+                    pointCounter += 1;
+                }   
+                
+                else
+                {
+                    UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
+                    pointCounter -= 1;
+                }    
+                
 
                 if (!UI.AskUserIfWantToContinueGame())
                 {

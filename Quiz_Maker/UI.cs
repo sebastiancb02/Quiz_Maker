@@ -59,13 +59,24 @@ public class UI
         Console.WriteLine("\nIs this answer true or false?");
         Console.WriteLine("Press 'T' if true");
         Console.WriteLine("Press 'F' if false");
-        char userOption = Console.ReadKey(true).KeyChar;
         
-        if (userOption == 'T' || userOption == 't')
-            return true;
+        while (true)
+        {
+            char userOption = Console.ReadKey(true).KeyChar;
+            
+            if (userOption == 'T' || userOption == 't')
+                return true;
         
-        if (userOption == 'F' || userOption == 'f')
-            return false;
+            if (userOption == 'F' || userOption == 'f')
+                return false;
+        
+            if (userOption != 'T' || userOption != 't' || userOption != 'F' || userOption != 'f')
+            {    
+                Console.WriteLine("\nPlease, make sure to input a valid character"); 
+                userOption = Console.ReadKey(true).KeyChar;
+                continue;
+            }    
+        }
         
         return true;
     }
@@ -73,13 +84,24 @@ public class UI
     public static bool AskUserIfMoreAnswersAreNeeded()
     {
         Console.WriteLine("\nDo you want to keep adding answers to this question? (y/n)");
-        char userOption = Console.ReadKey(true).KeyChar;
 
-        if (userOption == 'y' || userOption == 'Y')
-            return true;
+        while (true)
+        {
+            char userOption = Console.ReadKey(true).KeyChar;
+            
+            if (userOption == 'y' || userOption == 'Y')
+                return true;
         
-        if (userOption == 'n' || userOption == 'N')
-            return false;
+            if (userOption == 'n' || userOption == 'N')
+                return false;
+        
+            if (userOption != 'y' || userOption != 'Y' || userOption != 'n' || userOption != 'N')
+            {    
+                Console.WriteLine("\nPlease, make sure to input a valid character"); 
+                userOption = Console.ReadKey(true).KeyChar;
+                continue;
+            }    
+        }
         
         return true;
     }
@@ -87,13 +109,23 @@ public class UI
     public static bool AskUserIfMoreQuestionsAreNeeded()
     {
         Console.WriteLine("\nDo you want to keep adding more questions? (y/n)");
-        char userOption = Console.ReadKey(true).KeyChar;
+        while (true)
+        {
+            char userOption = Console.ReadKey(true).KeyChar;
+            
+            if (userOption == 'y' || userOption == 'Y')
+                return true;
         
-        if (userOption == 'y' || userOption == 'Y')
-            return true;
+            if (userOption == 'n' || userOption == 'N')
+                return false;
         
-        if (userOption == 'n' || userOption == 'N')
-            return false;
+            if (userOption != 'y' || userOption != 'Y' || userOption != 'n' || userOption != 'N')
+            {    
+                Console.WriteLine("\nPlease, make sure to input a valid character"); 
+                userOption = Console.ReadKey(true).KeyChar;
+                continue;
+            }    
+        }
         
         return true;
     }
@@ -107,14 +139,24 @@ public class UI
     public static bool AskUserIfWantToContinueGame()
     {
         Console.WriteLine("\nWould you like to keep playing? (y/n)");
-        char userOption = Console.ReadKey(true).KeyChar;
         
-        if (userOption == 'y' || userOption == 'Y')
-            return true;
+        while (true)
+        {
+            char userOption = Console.ReadKey(true).KeyChar;
+            
+            if (userOption == 'y' || userOption == 'Y')
+                return true;
         
-        if (userOption == 'n' || userOption == 'N')
-            Console.WriteLine("Well played, see you next time!");
-            return false;
+            if (userOption == 'n' || userOption == 'N')
+                return false;
+        
+            if (userOption != 'y' || userOption != 'Y' || userOption != 'n' || userOption != 'N')
+            {    
+                Console.WriteLine("\nPlease, make sure to input a valid character"); 
+                userOption = Console.ReadKey(true).KeyChar;
+                continue;
+            }    
+        }
         
         return true;
     }
@@ -147,25 +189,27 @@ public class UI
         }
     }
 
-    public static void DisplayBothQuestionAndAnswerOptions(Question question, int i)
+    public static void DisplayQuestions(Question question)
     {
         Console.Clear();
-        Console.WriteLine("\n" + question.questionText);
+        Console.WriteLine("\n" + question.questionText); 
+    }
+    
+    public static void DisplayAnswerOptions(Question question, int i)
+    {
         Console.WriteLine($"{i + 1}." + question.answerList[i].answerText);
     }
 
-    public static bool ShowUserIfChoosenOptionIsCorrectOrNot(bool correct)
+    public static void ShowUserIfChoosenOptionIsCorrectOrNot(bool correct)
     {
         if (correct)
         {
-            Console.WriteLine("Your answer is correct!");    
+            Console.WriteLine("\nYour answer is correct!");    
         }    
 
         else
         {
-            Console.WriteLine("Incorrect answer :,(");    
+            Console.WriteLine("\nIncorrect answer :,(");    
         }
-
-        return true;
     }
 }
