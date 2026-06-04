@@ -15,24 +15,42 @@ class Program
                 Question question = new Question();
                 question.questionText = UI.AskUserToWriteAQuestion(questionList);
                 questionList.Add(question);
-                
                 List<Answer> answerList = new List<Answer>();
-                Answer answer = new Answer();
                 
+                bool hasCorrectAnswer = false;
                 while (true)
                 {
+                    Answer answer = new Answer();
                     answer.answerText = UI.AskUserToWriteTheTextOfTheAnswers();
-                    answer.correct = UI.AskUserToAssignTrueOrFalse();
-                    answerList.Add(answer);
-                    question.answerList = answerList;//Is this correct????
+                    if (hasCorrectAnswer == false)
+                    {
+                        answer.correct = UI.AskUserToAssignTrueOrFalse();
+                    }
+                    
+                    if (answer.correct)
+                    {
+                        hasCorrectAnswer = true;
 
-                    if (UI.AskUserIfMoreAnswersAreNeeded() == false)
-                        break;
+                        for (int i = 0; i < answerList.Count; i++)
+                        {
+                            question.answerList[i].correct = false;
+                        }
+                    }
+                    answerList.Add(answer);
+                    question.answerList = answerList;
+
+                    if (answerList.Count >= 2)
+                    {
+                        if (!UI.AskUserIfMoreAnswersAreNeeded())
+                        {
+                            break;
+                        }    
+                    } 
                 }
                 
-                if (questionList.Count > 2)
+                if (questionList.Count >= 2)
                 {
-                    if (UI.AskUserIfMoreQuestionsAreNeeded() == false)
+                    if (!UI.AskUserIfMoreQuestionsAreNeeded())
                         break;
                 }
             }
@@ -56,7 +74,7 @@ class Program
 
                 Random rnd = new Random();
                 
-                Question question = questionList[rnd.Next(1, questionList.Count)];
+                Question question = questionList[rnd.Next(0, questionList.Count)];
 
                 List<Answer> answerList = new List<Answer>();
                 
@@ -64,9 +82,7 @@ class Program
                 {
                     Answer answer = question.answerList[i];
                     
-                    //Create method for the 2 lines below
-                    Console.WriteLine(question.questionText);
-                    Console.WriteLine($"{i}." + question.answerList);
+                    UI.DisplayBothQuestionAndAnswerOptions(question, i);
 
                     int userOption = UI.AskUserToChooseOneOfTheOptions(question);
                     
@@ -75,16 +91,15 @@ class Program
                     int pointCounter = 0;
                     if (pickedAnswer.correct)
                     {
-                        Console.WriteLine("Good boy");
+                        UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
                         pointCounter += 1;
                     }   
                 
-                    else 
-                    { 
-                        Console.WriteLine("Bad boy"); 
+                    else
+                    {
+                        UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
                         pointCounter -= 1;
                     }    
-                       
                 }
 
                 if (!UI.AskUserIfWantToContinueGame())

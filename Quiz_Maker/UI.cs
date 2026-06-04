@@ -9,6 +9,7 @@ public class UI
         Console.WriteLine("Press 2 if you want to play a quiz game");
 
         return Console.ReadKey(true).KeyChar;
+        Console.WriteLine();
     }
 
     public static int ValidateUserInput(char input)
@@ -86,7 +87,7 @@ public class UI
     public static bool AskUserIfMoreQuestionsAreNeeded()
     {
         Console.WriteLine("\nDo you want to keep adding more questions? (y/n)");
-        char userOption = Console.ReadKey().KeyChar;
+        char userOption = Console.ReadKey(true).KeyChar;
         
         if (userOption == 'y' || userOption == 'Y')
             return true;
@@ -96,6 +97,7 @@ public class UI
         
         return true;
     }
+    
     //Mode 2
     public static void ShowMessageIfQuestionListIsEmpty()
     {
@@ -105,12 +107,13 @@ public class UI
     public static bool AskUserIfWantToContinueGame()
     {
         Console.WriteLine("\nWould you like to keep playing? (y/n)");
-        char userOption = Console.ReadKey().KeyChar;
+        char userOption = Console.ReadKey(true).KeyChar;
         
         if (userOption == 'y' || userOption == 'Y')
             return true;
         
         if (userOption == 'n' || userOption == 'N')
+            Console.WriteLine("Well played, see you next time!");
             return false;
         
         return true;
@@ -120,7 +123,7 @@ public class UI
     {
         while (true)
         {    
-            char input = Console.ReadKey().KeyChar;
+            char input = Console.ReadKey(true).KeyChar;
             string userInputAsString = input.ToString();
             int userInput;
 
@@ -144,9 +147,25 @@ public class UI
         }
     }
 
-    public static void DisplayBothQuestionAndAnswerOptions(Question question)
+    public static void DisplayBothQuestionAndAnswerOptions(Question question, int i)
     {
-        Console.WriteLine(question.questionText);
-        //Console.WriteLine($"{i}." + question.answerList);
+        Console.Clear();
+        Console.WriteLine("\n" + question.questionText);
+        Console.WriteLine($"{i + 1}." + question.answerList[i].answerText);
+    }
+
+    public static bool ShowUserIfChoosenOptionIsCorrectOrNot(bool correct)
+    {
+        if (correct)
+        {
+            Console.WriteLine("Your answer is correct!");    
+        }    
+
+        else
+        {
+            Console.WriteLine("Incorrect answer :,(");    
+        }
+
+        return true;
     }
 }
