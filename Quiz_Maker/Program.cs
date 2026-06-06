@@ -17,19 +17,23 @@ class Program
                 questionList.Add(question);
                 List<Answer> answerList = new List<Answer>();
                 
-                bool hasCorrectAnswer = false;
+                bool questionHasOneCorrectAnswer = false;
                 while (true)
                 {
                     Answer answer = new Answer();
                     answer.answerText = UI.AskUserToWriteTheTextOfTheAnswers();
-                    if (hasCorrectAnswer == false)
+                    if (questionHasOneCorrectAnswer == false)
                     {
                         answer.correct = UI.AskUserToAssignTrueOrFalse();
+                        
+                        if (answer.correct)
+                        {    
+                            questionHasOneCorrectAnswer = true;    
+                        }    
                     }
                     else
                     {
                         answer.correct = false;
-                        hasCorrectAnswer = true;
                     }
                     
                     answerList.Add(answer);
@@ -63,13 +67,15 @@ class Program
                 List<Question> questionList = new List<Question>();
                 questionList = Logic.DeserializeTheBuiltQuizGame();
 
-                if (questionList.Count == 0)
+                if (questionList.Count == Constants.EMPTY_LIST)
                 {
                     UI.ShowMessageIfQuestionListIsEmpty();
                     break;
                 }
-                
-                Question question = questionList[rnd.Next(0, questionList.Count)];
+
+                int randomIndex = rnd.Next(Constants.FIRST_QUESTION_IN_THE_LIST, questionList.Count);
+                Question question = questionList[randomIndex];
+                questionList.RemoveAt(randomIndex);
                 
                 UI.DisplayQuestions(question);
                 
@@ -94,8 +100,7 @@ class Program
                 {
                     UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
                     pointCounter -= 1;
-                }    
-                
+                }
 
                 if (!UI.AskUserIfWantToContinueGame())
                 {

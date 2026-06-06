@@ -69,13 +69,8 @@ public class UI
         
             if (userOption == 'F' || userOption == 'f')
                 return false;
-        
-            if (userOption != 'T' || userOption != 't' || userOption != 'F' || userOption != 'f')
-            {    
-                Console.WriteLine("\nPlease, make sure to input a valid character"); 
-                userOption = Console.ReadKey(true).KeyChar;
-                continue;
-            }    
+            
+            Console.WriteLine("\nPlease, make sure to input a valid character"); 
         }
         
         return true;
@@ -94,13 +89,8 @@ public class UI
         
             if (userOption == 'n' || userOption == 'N')
                 return false;
-        
-            if (userOption != 'y' || userOption != 'Y' || userOption != 'n' || userOption != 'N')
-            {    
-                Console.WriteLine("\nPlease, make sure to input a valid character"); 
-                userOption = Console.ReadKey(true).KeyChar;
-                continue;
-            }    
+            
+            Console.WriteLine("\nPlease, make sure to input a valid character"); 
         }
         
         return true;
@@ -118,13 +108,8 @@ public class UI
         
             if (userOption == 'n' || userOption == 'N')
                 return false;
-        
-            if (userOption != 'y' || userOption != 'Y' || userOption != 'n' || userOption != 'N')
-            {    
-                Console.WriteLine("\nPlease, make sure to input a valid character"); 
-                userOption = Console.ReadKey(true).KeyChar;
-                continue;
-            }    
+
+            Console.WriteLine("\nPlease, make sure to input a valid character"); 
         }
         
         return true;
@@ -149,13 +134,8 @@ public class UI
         
             if (userOption == 'n' || userOption == 'N')
                 return false;
-        
-            if (userOption != 'y' || userOption != 'Y' || userOption != 'n' || userOption != 'N')
-            {    
-                Console.WriteLine("\nPlease, make sure to input a valid character"); 
-                userOption = Console.ReadKey(true).KeyChar;
-                continue;
-            }    
+
+            Console.WriteLine("\nPlease, make sure to input a valid character"); 
         }
         
         return true;
