@@ -120,6 +120,12 @@ public class UI
     {
         Console.WriteLine("\nQuestion list is empty, therefore this mode is not playable :(");
     }
+
+    public static void ShowMessageIfThereAreNoQuestionsLeft()
+    {
+        Console.Clear();
+        Console.WriteLine("\nThere are no more questions left to play with. Thank you for playing!");
+    }    
     
     public static bool AskUserIfWantToContinueGame()
     {
@@ -191,5 +197,10 @@ public class UI
         {
             Console.WriteLine("\nIncorrect answer :,(");    
         }
+    }
+
+    public static void DisplayTheFinalCounter(int pointCounter)
+    {
+        Console.WriteLine($"The final counter is {pointCounter}");
     }
 }

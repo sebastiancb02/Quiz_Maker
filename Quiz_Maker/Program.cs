@@ -60,52 +60,61 @@ class Program
 
         if (modeOption == Constants.PLAY_QUIZ_MODE)
         {
-            Random rnd = new Random();
-            bool keepPlaying = true;
-            while (keepPlaying)
+            List<Question> questionList = new List<Question>();
+            questionList = Logic.DeserializeTheBuiltQuizGame();
+            
+            if (questionList.Count == Constants.EMPTY_LIST)
             {
-                List<Question> questionList = new List<Question>();
-                questionList = Logic.DeserializeTheBuiltQuizGame();
+                UI.ShowMessageIfQuestionListIsEmpty();
+            }
 
-                if (questionList.Count == Constants.EMPTY_LIST)
+            else
+            {
+                Random rnd = new Random();
+                bool keepPlaying = true;
+                while (keepPlaying)
                 {
-                    UI.ShowMessageIfQuestionListIsEmpty();
-                    break;
-                }
+                    if (questionList.Count == Constants.EMPTY_LIST)
+                    {
+                        UI.ShowMessageIfThereAreNoQuestionsLeft();
+                        break;
+                    }
 
-                int randomIndex = rnd.Next(Constants.FIRST_QUESTION_IN_THE_LIST, questionList.Count);
-                Question question = questionList[randomIndex];
-                questionList.RemoveAt(randomIndex);
-                
-                UI.DisplayQuestions(question);
-                
-                for (int i = 0; i < question.answerList.Count; i++)
-                {
-                    Answer answer = question.answerList[i];
-                    UI.DisplayAnswerOptions(question, i);
-                }
-                
-                int userOption = UI.AskUserToChooseOneOfTheOptions(question);
+                    int randomIndex = rnd.Next(Constants.FIRST_QUESTION_IN_THE_LIST, questionList.Count);
+                    Question question = questionList[randomIndex];
+                    questionList.RemoveAt(randomIndex);
                     
-                Answer pickedAnswer = question.answerList[userOption - 1];
+                    UI.DisplayQuestions(question);
+                    
+                    for (int i = 0; i < question.answerList.Count; i++)
+                    {
+                        Answer answer = question.answerList[i];
+                        UI.DisplayAnswerOptions(question, i);
+                    }
+                    
+                    int userOption = UI.AskUserToChooseOneOfTheOptions(question);
                         
-                int pointCounter = 0;
-                if (pickedAnswer.correct)
-                {
-                    UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct); 
-                    pointCounter += 1;
-                }   
-                
-                else
-                {
-                    UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
-                    pointCounter -= 1;
-                }
+                    Answer pickedAnswer = question.answerList[userOption - 1];
+                            
+                    int pointCounter = 0;
+                    if (pickedAnswer.correct)
+                    {
+                        UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct); 
+                        pointCounter += 1;
+                    }   
+                    
+                    else
+                    {
+                        UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
+                        pointCounter -= 1; 
+                    }
 
-                if (!UI.AskUserIfWantToContinueGame())
-                {
-                    keepPlaying = false;
-                    break;
+                    if (!UI.AskUserIfWantToContinueGame())
+                    {
+                        keepPlaying = false;
+                        UI.DisplayTheFinalCounter(pointCounter);
+                        break;
+                    }
                 }
             }
         }    
