@@ -33,4 +33,21 @@ public class Logic
             return new List<Question>();
         }
     }
+    
+    public static int CalculatePointCounterValue(Answer pickedAnswer)
+    {
+        int pointCounter = 0;
+        
+        if (pickedAnswer.correct)
+        {
+            pointCounter += 1;
+        }
+
+        else
+        {
+            pointCounter -= 1;
+        }
+
+        return pointCounter;
+    }    
 }

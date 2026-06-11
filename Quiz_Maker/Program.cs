@@ -71,19 +71,11 @@ class Program
                     int userOption = UI.AskUserToChooseOneOfTheOptions(question);
                         
                     Answer pickedAnswer = question.answerList[userOption - 1];
-                            
-                    int pointCounter = 0;
-                    if (pickedAnswer.correct)
-                    {
-                        UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct); 
-                        pointCounter += 1;
-                    }   
                     
-                    else
-                    {
-                        UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct);
-                        pointCounter -= 1; 
-                    }
+                    int pointCounter = 0;
+                    UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct); 
+                    pointCounter += Logic.CalculatePointCounterValue(pickedAnswer);    
+                    
 
                     if (!UI.AskUserIfWantToContinueGame())
                     {
