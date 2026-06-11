@@ -88,7 +88,7 @@ class Program
                     for (int i = 0; i < question.answerList.Count; i++)
                     {
                         Answer answer = question.answerList[i];
-                        UI.DisplayAnswerOptions(question, i);
+                        UI.DisplayAnswerOptions(answer, i);
                     }
                     
                     int userOption = UI.AskUserToChooseOneOfTheOptions(question);

@@ -181,9 +181,9 @@ public class UI
         Console.WriteLine("\n" + question.questionText); 
     }
     
-    public static void DisplayAnswerOptions(Question question, int i)
+    public static void DisplayAnswerOptions(Answer answer, int i)
     {
-        Console.WriteLine($"{i + 1}." + question.answerList[i].answerText);
+        Console.WriteLine($"{i + 1}." + answer.answerText);
     }
 
     public static void ShowUserIfChoosenOptionIsCorrectOrNot(bool correct)
