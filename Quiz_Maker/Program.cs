@@ -39,7 +39,7 @@ class Program
                     answerList.Add(answer);
                     question.answerList = answerList;
 
-                    if (answerList.Count >= 2)
+                    if (answerList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
                     {
                         if (!UI.AskUserIfMoreAnswersAreNeeded())
                         {
@@ -48,7 +48,7 @@ class Program
                     } 
                 }
                 
-                if (questionList.Count >= 2)
+                if (questionList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
                 {
                     if (!UI.AskUserIfMoreQuestionsAreNeeded())
                         break;
