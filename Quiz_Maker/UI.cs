@@ -120,7 +120,6 @@ public class UI
             }
         
             answerList.Add(answer);
-            question.answerList = answerList;
 
             if (answerList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
             {

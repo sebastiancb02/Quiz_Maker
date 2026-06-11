@@ -27,7 +27,9 @@ class Program
                         if (!UI.AskUserIfMoreQuestionsAreNeeded())
                             break;
                     }
-                }    
+                }
+                
+                question.answerList = answerList;
             }
             
             Logic.SerializeTheBuiltQuizGame(questionList);
