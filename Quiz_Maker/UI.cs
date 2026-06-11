@@ -96,6 +96,44 @@ public class UI
         return true;
     }
 
+    public static Answer PrepareAnswer(bool questionHasOneCorrectAnswer, List<Answer> answerList, Question question)
+    {
+        Answer answer = new Answer();
+        
+        while (true)
+        {    
+            answer = new Answer();
+            answer.answerText = UI.AskUserToWriteTheTextOfTheAnswers();
+            if (questionHasOneCorrectAnswer == false)
+            {
+                answer.correct = UI.AskUserToAssignTrueOrFalse();
+            
+                if (answer.correct)
+                {    
+                    questionHasOneCorrectAnswer = true;    
+                }    
+            }
+    	    
+            else
+            {
+                answer.correct = false;
+            }
+        
+            answerList.Add(answer);
+            question.answerList = answerList;
+
+            if (answerList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
+            {
+                if (!UI.AskUserIfMoreAnswersAreNeeded())
+                {
+                    break;
+                }    
+            } 
+        }
+        
+        return answer;
+    }
+
     public static bool AskUserIfMoreQuestionsAreNeeded()
     {
         Console.WriteLine("\nDo you want to keep adding more questions? (y/n)");

@@ -20,39 +20,14 @@ class Program
                 bool questionHasOneCorrectAnswer = false;
                 while (true)
                 {
-                    Answer answer = new Answer();
-                    answer.answerText = UI.AskUserToWriteTheTextOfTheAnswers();
-                    if (questionHasOneCorrectAnswer == false)
-                    {
-                        answer.correct = UI.AskUserToAssignTrueOrFalse();
-                        
-                        if (answer.correct)
-                        {    
-                            questionHasOneCorrectAnswer = true;    
-                        }    
-                    }
-                    else
-                    {
-                        answer.correct = false;
-                    }
-                    
-                    answerList.Add(answer);
-                    question.answerList = answerList;
-
-                    if (answerList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
-                    {
-                        if (!UI.AskUserIfMoreAnswersAreNeeded())
-                        {
-                            break;
-                        }    
-                    } 
-                }
+                    answerList.Add(UI.PrepareAnswer(questionHasOneCorrectAnswer, answerList, question));
                 
-                if (questionList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
-                {
-                    if (!UI.AskUserIfMoreQuestionsAreNeeded())
-                        break;
-                }
+                    if (questionList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
+                    {
+                        if (!UI.AskUserIfMoreQuestionsAreNeeded())
+                            break;
+                    }
+                }    
             }
             
             Logic.SerializeTheBuiltQuizGame(questionList);
