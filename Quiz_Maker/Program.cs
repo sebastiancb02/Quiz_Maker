@@ -71,8 +71,7 @@ class Program
             else
             {
                 Random rnd = new Random();
-                bool keepPlaying = true;
-                while (keepPlaying)
+                while (true)
                 {
                     if (questionList.Count == Constants.EMPTY_LIST)
                     {
@@ -111,7 +110,6 @@ class Program
 
                     if (!UI.AskUserIfWantToContinueGame())
                     {
-                        keepPlaying = false;
                         UI.DisplayTheFinalCounter(pointCounter);
                         break;
                     }
