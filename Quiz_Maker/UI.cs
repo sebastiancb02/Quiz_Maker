@@ -96,38 +96,24 @@ public class UI
         return true;
     }
 
-    public static Answer PrepareAnswer(bool questionHasOneCorrectAnswer, List<Answer> answerList, Question question)
+    public static Answer PrepareAnswer(bool questionHasOneCorrectAnswer)
     {
         Answer answer = new Answer();
+        answer.answerText = UI.AskUserToWriteTheTextOfTheAnswers();
         
-        while (true)
-        {    
-            answer = new Answer();
-            answer.answerText = UI.AskUserToWriteTheTextOfTheAnswers();
-            if (questionHasOneCorrectAnswer == false)
-            {
-                answer.correct = UI.AskUserToAssignTrueOrFalse();
+        if (questionHasOneCorrectAnswer == false)
+        {
+            answer.correct = UI.AskUserToAssignTrueOrFalse();
             
-                if (answer.correct)
-                {    
-                    questionHasOneCorrectAnswer = true;    
-                }    
-            }
+            if (answer.correct)
+            {    
+                questionHasOneCorrectAnswer = true;    
+            }    
+        }
     	    
-            else
-            {
-                answer.correct = false;
-            }
-        
-            answerList.Add(answer);
-
-            if (answerList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
-            {
-                if (!UI.AskUserIfMoreAnswersAreNeeded())
-                {
-                    break;
-                }    
-            } 
+        else 
+        { 
+            answer.correct = false;
         }
         
         return answer;
@@ -238,6 +224,7 @@ public class UI
 
     public static void DisplayTheFinalCounter(int pointCounter)
     {
-        Console.WriteLine($"The final counter is {pointCounter}");
+        Console.Clear();
+        Console.WriteLine($"\nThe final counter is {pointCounter}");
     }
 }

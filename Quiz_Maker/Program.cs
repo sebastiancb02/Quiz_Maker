@@ -20,16 +20,24 @@ class Program
                 bool questionHasOneCorrectAnswer = false;
                 while (true)
                 {
-                    answerList.Add(UI.PrepareAnswer(questionHasOneCorrectAnswer, answerList, question));
-                
-                    if (questionList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
+                    answerList.Add(UI.PrepareAnswer(questionHasOneCorrectAnswer));
+                    
+                    if (answerList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
                     {
-                        if (!UI.AskUserIfMoreQuestionsAreNeeded())
+                        if (!UI.AskUserIfMoreAnswersAreNeeded())
+                        {
                             break;
-                    }
+                        }    
+                    } 
                 }
                 
                 question.answerList = answerList;
+                
+                if (questionList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
+                {
+                    if (!UI.AskUserIfMoreQuestionsAreNeeded())
+                        break;
+                }
             }
             
             Logic.SerializeTheBuiltQuizGame(questionList);
@@ -48,6 +56,7 @@ class Program
             else
             {
                 Random rnd = new Random();
+                int pointCounter = 0;
                 while (true)
                 {
                     if (questionList.Count == Constants.EMPTY_LIST)
@@ -72,12 +81,11 @@ class Program
                         
                     Answer pickedAnswer = question.answerList[userOption - 1];
                     
-                    int pointCounter = 0;
                     UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct); 
-                    pointCounter += Logic.CalculatePointCounterValue(pickedAnswer);    
+                    pointCounter = Logic.CalculatePointCounterValue(pickedAnswer, pointCounter);    
                     
 
-                    if (!UI.AskUserIfWantToContinueGame())
+                    if (!UI.AskUserIfWantToContinueGame() || questionList.Count == Constants.EMPTY_LIST)
                     {
                         UI.DisplayTheFinalCounter(pointCounter);
                         break;
