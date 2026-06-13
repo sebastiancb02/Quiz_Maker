@@ -48,6 +48,7 @@ class Program
             List<Question> questionList = new List<Question>();
             questionList = Logic.DeserializeTheBuiltQuizGame();
             
+            
             if (questionList.Count == Constants.EMPTY_LIST)
             {
                 UI.ShowMessageIfQuestionListIsEmpty();
@@ -55,8 +56,8 @@ class Program
 
             else
             {
-                Random rnd = new Random();
                 int pointCounter = 0;
+                Random rnd = new Random();
                 while (true)
                 {
                     if (questionList.Count == Constants.EMPTY_LIST)
@@ -82,10 +83,9 @@ class Program
                     Answer pickedAnswer = question.answerList[userOption - 1];
                     
                     UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct); 
-                    pointCounter = Logic.CalculatePointCounterValue(pickedAnswer, pointCounter);    
-                    
+                    pointCounter += Logic.CalculatePointCounterValue(pickedAnswer.correct);
 
-                    if (!UI.AskUserIfWantToContinueGame() || questionList.Count == Constants.EMPTY_LIST)
+                    if (questionList.Count != Constants.EMPTY_LIST)
                     {
                         UI.DisplayTheFinalCounter(pointCounter);
                         break;

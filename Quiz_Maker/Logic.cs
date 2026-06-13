@@ -34,9 +34,11 @@ public class Logic
         }
     }
     
-    public static int CalculatePointCounterValue(Answer pickedAnswer, int pointCounter)
+    public static int CalculatePointCounterValue(bool correct)
     {
-        if (pickedAnswer.correct)
+        int pointCounter = 0;
+        
+        if (correct)
         {
             pointCounter += 1;
         }
