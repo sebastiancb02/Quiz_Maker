@@ -3,10 +3,9 @@ using System.Xml.Serialization;
 namespace Quiz_Maker;
 public class Logic
 {
+    public static readonly XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
     public static void SerializeTheBuiltQuizGame(List<Question> questionList)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
-
         string path = Constants.QUIZ_FILE_PATH;
         using (FileStream file = File.Create(path))
         {
@@ -16,11 +15,9 @@ public class Logic
 
     public static List<Question> DeserializeTheBuiltQuizGame()
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Question>));
         string path = Constants.QUIZ_FILE_PATH;
-        string curFile = Constants.QUIZ_FILE_PATH;
         
-        if (File.Exists(curFile))
+        if (File.Exists(path))
         {
             using (FileStream file = File.OpenRead(path))
             {

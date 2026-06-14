@@ -9,7 +9,6 @@ public class UI
         Console.WriteLine("Press 2 if you want to play a quiz game");
 
         return Console.ReadKey(true).KeyChar;
-        Console.WriteLine();
     }
 
     public static int ValidateUserInput(char input)
@@ -38,7 +37,7 @@ public class UI
             return userInput;
         }
     }
-    //Mode 1
+    //Mode 1----------------------------------------------------------------------------------------------------------
     public static string AskUserToWriteAQuestion(List<Question> questionList)
     {
         if (questionList.Count >= 1)
@@ -138,7 +137,7 @@ public class UI
         return true;
     }
     
-    //Mode 2
+    //Mode 2----------------------------------------------------------------------------------------------------------
     public static void ShowMessageIfQuestionListIsEmpty()
     {
         Console.WriteLine("\nQuestion list is empty, therefore this mode is not playable :(");
@@ -183,14 +182,12 @@ public class UI
             if (!valid)
             {
                 Console.WriteLine("\nInvalid Input"); 
-                input = Console.ReadKey(true).KeyChar;
                 continue;
             }
             
             if (userInput < 1 || userInput > question.answerList.Count) 
             {
                 Console.WriteLine("\nYour chosen option is not valid, pick another one"); 
-                input = Console.ReadKey(true).KeyChar;
                 continue;
             }
                 
@@ -200,7 +197,6 @@ public class UI
 
     public static void DisplayQuestions(Question question)
     {
-        Console.Clear();
         Console.WriteLine("\n" + question.questionText); 
     }
     
@@ -211,6 +207,8 @@ public class UI
 
     public static void ShowUserIfChoosenOptionIsCorrectOrNot(bool correct)
     {
+        Console.Clear();
+        
         if (correct)
         {
             Console.WriteLine("\nYour answer is correct!");    
@@ -225,6 +223,6 @@ public class UI
     public static void DisplayTheFinalCounter(int pointCounter)
     {
         Console.Clear();
-        Console.WriteLine($"\nThe final counter is {pointCounter}");
+        Console.WriteLine($"\nNo more questions left! Your final counter is {pointCounter}");
     }
 }

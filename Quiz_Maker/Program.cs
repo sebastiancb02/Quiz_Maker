@@ -85,7 +85,7 @@ class Program
                     UI.ShowUserIfChoosenOptionIsCorrectOrNot(pickedAnswer.correct); 
                     pointCounter += Logic.CalculatePointCounterValue(pickedAnswer.correct);
 
-                    if (questionList.Count != Constants.EMPTY_LIST)
+                    if (questionList.Count == Constants.EMPTY_LIST)
                     {
                         UI.DisplayTheFinalCounter(pointCounter);
                         break;
