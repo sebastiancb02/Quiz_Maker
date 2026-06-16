@@ -31,6 +31,19 @@ public class Logic
         }
     }
     
+    public static bool CheckIfThereIsAnAnswerAssignedAsTrue (List<Answer> answerList)
+    {
+        foreach (Answer answer in answerList)
+        {
+            if (answer.correct)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
     public static int CalculatePointCounterValue(bool correct)
     {
         int pointCounter = 0;
