@@ -63,10 +63,10 @@ public class UI
         {
             char userOption = Console.ReadKey(true).KeyChar;
             
-            if (userOption == 'T' || userOption == 't')
+            if (userOption == Constants.UPPERCASE_T || userOption == Constants.LOWERCASE_T)
                 return true;
         
-            if (userOption == 'F' || userOption == 'f')
+            if (userOption == Constants.UPPERCASE_F || userOption == Constants.LOWERCASE_F)
                 return false;
             
             Console.WriteLine("\nPlease, make sure to input a valid character"); 
@@ -83,10 +83,10 @@ public class UI
         {
             char userOption = Console.ReadKey(true).KeyChar;
             
-            if (userOption == 'y' || userOption == 'Y')
+            if (userOption == Constants.UPPERCASE_Y || userOption == Constants.LOWERCASE_Y)
                 return true;
         
-            if (userOption == 'n' || userOption == 'N')
+            if (userOption == Constants.UPPERCASE_N || userOption == Constants.LOWERCASE_N)
                 return false;
             
             Console.WriteLine("\nPlease, make sure to input a valid character"); 
@@ -125,10 +125,10 @@ public class UI
         {
             char userOption = Console.ReadKey(true).KeyChar;
             
-            if (userOption == 'y' || userOption == 'Y')
+            if (userOption == Constants.UPPERCASE_Y || userOption == Constants.LOWERCASE_Y)
                 return true;
         
-            if (userOption == 'n' || userOption == 'N')
+            if (userOption == Constants.UPPERCASE_N || userOption == Constants.LOWERCASE_N)
                 return false;
 
             Console.WriteLine("\nPlease, make sure to input a valid character"); 
@@ -148,26 +148,6 @@ public class UI
         Console.Clear();
         Console.WriteLine("\nThere are no more questions left to play with. Thank you for playing!");
     }    
-    
-    public static bool AskUserIfWantToContinueGame()
-    {
-        Console.WriteLine("\nWould you like to keep playing? (y/n)");
-        
-        while (true)
-        {
-            char userOption = Console.ReadKey(true).KeyChar;
-            
-            if (userOption == 'y' || userOption == 'Y')
-                return true;
-        
-            if (userOption == 'n' || userOption == 'N')
-                return false;
-
-            Console.WriteLine("\nPlease, make sure to input a valid character"); 
-        }
-        
-        return true;
-    }
 
     public static int AskUserToChooseOneOfTheOptions(Question question)
     {

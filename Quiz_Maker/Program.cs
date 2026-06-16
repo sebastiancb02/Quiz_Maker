@@ -20,6 +20,7 @@ class Program
                 bool questionHasOneCorrectAnswer = false;
                 while (true)
                 {
+                    questionHasOneCorrectAnswer = Logic.CheckIfThereIsAnAnswerAssignedAsTrue(answerList);
                     answerList.Add(UI.PrepareAnswer(questionHasOneCorrectAnswer));
                     
                     if (answerList.Count >= Constants.TWO_QUESTIONS_IN_QUESTION_LIST)
